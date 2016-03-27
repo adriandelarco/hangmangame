@@ -3,10 +3,40 @@ var word_to_guess = ""
 var lifes = 6
 var correct = 0
 var guesses = 0
+var texto = ""
+
+function loadFileAsText()
+{
+	var fileToLoad = document.getElementById("fileToLoad").files[0];
+
+	var fileReader = new FileReader();
+	fileReader.onload = function(fileLoadedEvent) 
+	{
+		var textFromFileLoaded = fileLoadedEvent.target.result;
+		dictionary = textFromFileLoaded
+	};
+	fileReader.readAsText(fileToLoad, "UTF-8");
+}
+
+function newWord() {
+
+	if (dictionary !== "") {
+		
+		var dictionary_array = dictionary.split('\n');
+		var random_number = Math.floor((Math.random() * dictionary_array.length)); 
+
+		return dictionary_array[random_number];
+	} else {
+
+		console.log ("Selecciona primero un diccionario.");
+	}
+}
+
 
 function newgame() {
 
-	word_to_guess = quitaAcentos(prompt("¿Qué palabra tendrá que adivinar?").toLowerCase()); 
+	word_to_guess = newWord();
+	//word_to_guess = quitaAcentos(prompt("¿Qué palabra tendrá que adivinar?").toLowerCase()); 
 
 	for (var i = 0; i < word_to_guess.length; i++) {
 		map.push ("_");
