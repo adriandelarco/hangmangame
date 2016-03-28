@@ -1,10 +1,14 @@
 header{
-	width:100%;
-	height:100px;
+	width: 100%;
+    height: 100px;
+    text-align: center;
+    font-size: 23px;
+    color: #424242;
+    font-family: sans-serif;
 }
 
 body{
-	background: #EFF4F9;
+
 }
 
 p{
@@ -13,8 +17,123 @@ p{
     color: #5D5D5D;
 }
 
+.divmodalidad {
+    margin: 40px auto;
+    width: 585px;
+	border: 1px solid #999999;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+
+}
+
 .divdiccionario {
 
 	margin: 0 auto;
-    width: 800px;
+    width: 585px;
+	border: 1px solid #999999;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    cursor: pointer;
+    font-size:20px;
+    background: #FFF8DD;
+}
+
+button {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    cursor: pointer;
+    font-size:20px;
+    background: white;
+}
+
+.numeros {
+	background: #FF9800;
+
+    padding: 10px 16px;
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+}
+
+.drawing {
+	background: white;
+    float: left;
+}
+
+#letters {
+    width: 690px;
+    height: 80px;
+    float: right;
+    background-color: #fff7c4;
+	border: 2px solid #999999;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fffad4', endColorstr = '#ffe37f');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#fffad4', endColorstr = '#ffe37f')";
+	background-image: -moz-linear-gradient(top, #fffad4, #ffe37f);
+	background-image: -ms-linear-gradient(top, #fffad4, #ffe37f);
+	background-image: -o-linear-gradient(top, #fffad4, #ffe37f);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#fffad4), to(#ffe37f));
+	background-image: -webkit-linear-gradient(top, #fffad4, #ffe37f);
+	background-image: linear-gradient(top, #fffad4, #ffe37f);
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+}
+
+
+#letters span {
+    font-size: 50px;
+    padding: 20px;
+}
+
+
+#gameinput {
+    width: 470px;
+    height: 37px;
+    margin: 0 0 0 10px;
+    padding: 0;
+
+}
+
+#game {
+	width: 900px;
+    margin: 0 auto;
+    display: none;
+}
+
+#consoletext {
+	width: 684px;
+    height: 70px;
+    margin: 10px 0 10px 10px;
+    display:block;
+    font-size: 30px;
+    float: right;
+
+
+
+}
+
+.sendanswer {
+	height: 39px;
+    width: 200px;
+    font-size: 10px;
+    margin: 0 0 0 10px;
 }
