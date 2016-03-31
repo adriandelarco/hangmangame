@@ -18,14 +18,14 @@
 			<div class = "divdiccionario">
 				<table style="margin-left: 15px;">
 					<tbody>
-						<tr><td><span class ="numeros">1</span></td><td><label for="fileToLoad" class="custom-file-upload"> Selecciona un dicionario</label><input type="file" id="fileToLoad"/></td><td><button onclick="loadFileAsText()">Cargar diccionario</button></td></tr>
+						<tr><td><span class ="numeros">1</span></td><td><label id="dictionarylabel" for="fileToLoad" class="custom-file-upload">Selecciona un dicionario</label><input type="file" id="fileToLoad"/></td><td><button onclick="loadFileAsText()">Cargar diccionario</button></td></tr>
 					</tbody>
 				</table>
 			</div>
 			<div class = "divmodalidad">
 				<table style="margin-left: 15px;">
 					<tbody>
-						<tr><td><span class="numeros">2</span></td><td><button onclick="newGameAI()">Jugar contra AI</button></td><td><button onclick="newGame2P()">Jugar 2 jugadores</button></td></tr>
+						<tr><td><span class="numeros">2</span></td><td><button onclick="newGameAI()">Nueva partida vs AI</button></td><td><button onclick="newGame2P()">Nueva partida 2P</button></td></tr>
 					</tbody>
 				</table>
 			</div>
@@ -41,6 +41,14 @@
 				<input type="text" id="gameinput" onkeypress="enterpressalert(event, this)">
 				<button class="sendanswer" onclick="game()">Enter</button>
 			</div>
+		</div>
+
+		<div id="saveandload">
+			<table style="margin: 0 auto;">
+				<tbody>
+					<tr><td><button id="savebutton" onclick="saveGame()">Guardar partida</button></td><td><button id="loadbutton" onclick="loadGame()">Cargar partida</button></td></tr>
+				</tbody>
+			</table>
 		</div>
 		
 		<script type="text/javascript" src="js/hangman.js"></script>

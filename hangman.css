@@ -38,6 +38,24 @@ p{
 
 }
 
+#saveandload {
+
+	margin: 0 auto;
+	width: 585px;
+}
+
+#savebutton {
+	display: none;
+}
+
+#loadbutton {
+	display: none;
+} 
+
+#cleanbutton {
+	display: none;
+}
+
 input[type="file"] {
     display: none;
 }
@@ -114,8 +132,9 @@ button {
 }
 
 #game {
-	width: 900px;
-    margin: 0 auto;
+    width: 900px;
+    margin: 100px auto 10px auto;
+    height: 350px;
     display: none;
 }
 

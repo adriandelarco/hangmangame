@@ -5,10 +5,14 @@ var correct = 0
 var guesses = 0
 var dictionary =""
 
+ if (localStorage.getItem('map')) { document.getElementById("loadbutton").style.display = 'block';}
+
 function loadFileAsText(){
 	var fileToLoad = document.getElementById("fileToLoad").files[0];
 
 	if (fileToLoad == null) { return alert("Selecciona antes un diccionario.");};
+
+	document.getElementById("dictionarylabel").innerHTML = fileToLoad.name
 
 	var fileReader = new FileReader();
 	fileReader.onload = function(fileLoadedEvent) 
@@ -39,11 +43,14 @@ function newWord() {
 function newGameAI() {
 
 	restartvariables();
+	cleanGame();
 
 	word_to_guess = newWord();
 	if (dictionary === "") { return;}
 
 	document.getElementById("game").style.display = 'block';
+	document.getElementById("savebutton").style.display = 'block';
+
 	for (var i = 0; i < word_to_guess.length; i++) {
 		map.push ("_");
 	}
@@ -56,10 +63,14 @@ function newGameAI() {
 function newGame2P() {
 
 	restartvariables();
+	cleanGame();
+
 	word_to_guess = quitaAcentos(prompt("¿Qué palabra tendrá que adivinar?").toLowerCase()); 
 	if (word_to_guess.length < 3) {alert("La palabra tiene que ser de tres o más letras"); return newGame2P();}
 
 	document.getElementById("game").style.display = 'block';
+	document.getElementById("savebutton").style.display = 'block';
+
 	for (var i = 0; i < word_to_guess.length; i++) {
 		map.push ("_");
 	}
@@ -75,11 +86,8 @@ function game (){
 
 	if (word_to_guess==="" || lifes === 0) {return;}
 
-
 	var attempt=document.getElementById("gameinput").value.toLowerCase();
 	document.getElementById("gameinput").value = ""
-
-	//prompt("Intenta resolverlo, o prueba con una nueva letra.").toLowerCase();
 
 	if (attempt.length === 1) {
 
@@ -109,7 +117,8 @@ function game (){
 		} else {
 			imprConsole ("Has perdido, la palabra era: " + word_to_guess + "\n .Por favor, inicia una nueva partida.");	
 			document.getElementById("hangmandrawing").src = "7.jpg";
-			return;		
+			document.getElementById("savebutton").style.display = 'none';
+			return cleanGame();		
 		}
 
 	} else {
@@ -150,7 +159,8 @@ function fallo (){
 		imprConsole ("Has perdido, la palabra era: " + word_to_guess + "\n .Por favor, inicia una nueva partida.");	
 		imprMap(map);
 		document.getElementById("hangmandrawing").src = "7.jpg";
-		return;
+		document.getElementById("savebutton").style.display = 'none';
+		return cleanGame();
 	} else {
 		imprConsole ("Te quedan: " + lifes + " vidas.");
 
@@ -206,3 +216,50 @@ function restartvariables(){
 	guesses = 0
 	document.getElementById("hangmandrawing").src = "1.jpg";
 }
+
+function saveGame() {
+
+	if (lifes === 0) {return;}
+
+	localStorage.setItem('word_to_guess', word_to_guess);
+	localStorage.setItem('lifes', lifes);
+	localStorage.setItem('correct', correct);
+	localStorage.setItem('guesses', guesses);
+	localStorage.setItem('dictionary', dictionary);
+	localStorage.setItem("map", JSON.stringify(map));
+	document.getElementById("game").style.display = 'none';
+	document.getElementById("savebutton").style.display = 'none';
+	document.getElementById("loadbutton").style.display = 'block';
+
+}
+
+function loadGame() {
+
+    if (localStorage.getItem('map')) {
+        word_to_guess = localStorage.getItem('word_to_guess');
+        lifes = localStorage.getItem('lifes');
+        correct = localStorage.getItem('correct');
+        guesses = localStorage.getItem('guesses');
+        dictionary = localStorage.getItem('dictionary');
+        map = JSON.parse(localStorage.getItem("map"));
+
+	    document.getElementById("game").style.display = 'block';
+		document.getElementById("savebutton").style.display = 'block';
+		document.getElementById("loadbutton").style.display = 'none';
+		imprConsole ("Te quedan: " + lifes + " vidas.");	
+		imprMap(map);
+	}
+
+
+	
+}
+
+function cleanGame() {
+ 
+	localStorage.clear();
+	window.localStorage.clear();
+	document.getElementById("loadbutton").style.display = 'none';
+	return restartvariables();
+}
+
+
