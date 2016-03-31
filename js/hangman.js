@@ -4,6 +4,7 @@ var lifes = 6
 var correct = 0
 var guesses = 0
 var dictionary =""
+var foto = "img/1.jpg"
 
  if (localStorage.getItem('map')) { document.getElementById("loadbutton").style.display = 'block';}
 
@@ -111,12 +112,17 @@ function game (){
 	} else if (attempt.length === word_to_guess.length) { 
 
 		if (attempt === word_to_guess) {
+			map = word_to_guess
+			imprMap(map);
 			imprConsole ("Has ganado, es la palabra correcta\n .Por favor, inicia una nueva partida.");
-			document.getElementById("hangmandrawing").src = "8.jpg";
+			document.getElementById("hangmandrawing").src = "img/8.jpg";
+			document.getElementById("savebutton").style.display = 'none';
 			return;
 		} else {
+			map = word_to_guess
+			imprMap(map);
 			imprConsole ("Has perdido, la palabra era: " + word_to_guess + "\n .Por favor, inicia una nueva partida.");	
-			document.getElementById("hangmandrawing").src = "7.jpg";
+			document.getElementById("hangmandrawing").src = "img/7.jpg";
 			document.getElementById("savebutton").style.display = 'none';
 			return cleanGame();		
 		}
@@ -137,14 +143,13 @@ function acierto (){
 
 	if (guesses === word_to_guess.length) {
 		 imprConsole ("Has ganado, has acertado todas las letras la palabra. \n Por favor, inicia una nueva partida.");
-		 document.getElementById("hangmandrawing").src = "8.jpg";
+		 document.getElementById("hangmandrawing").src = "img/8.jpg";
+		 document.getElementById("savebutton").style.display = 'none';
 		 imprMap(map);
-		return;
+		 return;
 	}else{
-
 		imprMap(map);
 		correct = 0
-
 	}
 
 }
@@ -158,13 +163,13 @@ function fallo (){
 		map = word_to_guess
 		imprConsole ("Has perdido, la palabra era: " + word_to_guess + "\n .Por favor, inicia una nueva partida.");	
 		imprMap(map);
-		document.getElementById("hangmandrawing").src = "7.jpg";
+		document.getElementById("hangmandrawing").src = "img/7.jpg";
 		document.getElementById("savebutton").style.display = 'none';
 		return cleanGame();
 	} else {
 		imprConsole ("Te quedan: " + lifes + " vidas.");
 
-		var foto = (7 - lifes) + ".jpg"
+		foto = "img/" + (7 - lifes) + ".jpg"
 		document.getElementById("hangmandrawing").src = foto;
 	}
 
@@ -214,12 +219,12 @@ function restartvariables(){
 	lifes = 6
 	correct = 0
 	guesses = 0
-	document.getElementById("hangmandrawing").src = "1.jpg";
+	document.getElementById("hangmandrawing").src = "img/1.jpg";
 }
 
 function saveGame() {
 
-	if (lifes === 0) {return;}
+	if (lifes === 0 || lifes === 6) {return console.log ("No puedes guardar una partida que no está en juego.");}
 
 	localStorage.setItem('word_to_guess', word_to_guess);
 	localStorage.setItem('lifes', lifes);
@@ -227,6 +232,7 @@ function saveGame() {
 	localStorage.setItem('guesses', guesses);
 	localStorage.setItem('dictionary', dictionary);
 	localStorage.setItem("map", JSON.stringify(map));
+	localStorage.setItem("foto", foto);
 	document.getElementById("game").style.display = 'none';
 	document.getElementById("savebutton").style.display = 'none';
 	document.getElementById("loadbutton").style.display = 'block';
@@ -242,14 +248,15 @@ function loadGame() {
         guesses = localStorage.getItem('guesses');
         dictionary = localStorage.getItem('dictionary');
         map = JSON.parse(localStorage.getItem("map"));
+        foto = localStorage.getItem("foto");
 
 	    document.getElementById("game").style.display = 'block';
 		document.getElementById("savebutton").style.display = 'block';
 		document.getElementById("loadbutton").style.display = 'none';
+		document.getElementById("hangmandrawing").src = foto;
 		imprConsole ("Te quedan: " + lifes + " vidas.");	
 		imprMap(map);
 	}
-
 
 	
 }
